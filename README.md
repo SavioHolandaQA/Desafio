@@ -1,13 +1,18 @@
 # Projeto de Automação de Testes com Selenium e Maven
 
-Este é um projeto de automação de testes utilizando o **Selenium WebDriver** com **Maven**, escrito em **Java**. O objetivo é realizar a automação do processo de compra em um site de ecommerce, verificando funcionalidades como cadastro, login, adição de produtos no carrinho e finalização da compra.
+Desafio - Automação da Loja MUUito Sabor.
+Este projeto é parte de um desafio de automação de testes, onde simulei um fluxo de compra em uma loja fictícia de e-commerce chamada MUUito Sabor, um nome criado por mim. O objetivo é testar o processo de compra em um site de e-commerce utilizando Selenium WebDriver com Maven e Java.
+
+A automação envolve a verificação de funcionalidades como cadastro, login, busca de produtos, adição ao carrinho, preenchimento de dados de endereço e finalização de compra.
+
+Site Fictício: MUUito Sabor
 
 ## Tecnologias Usadas
 
 - **Java** (Versão 23)
-- **Selenium WebDriver** (Versão X.X.X)
+- **Selenium WebDriver** (Versão 4.10.0)
 - **Maven** (Versão 3.8.4)
-- **ChromeDriver** (Versão X.X.X)
+- **ChromeDriver** (Versão 134.0.6998.118 
 
 ## Pré-requisitos
 
