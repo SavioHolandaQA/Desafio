@@ -1,9 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import java.time.Duration;
 
 public class fluxodecompra {
     public static void main(String[] args) {
@@ -17,7 +14,7 @@ public class fluxodecompra {
         driver.findElement(By.id("nome")).sendKeys("Sávio");
         driver.findElement(By.id("sobrenome")).sendKeys("QA");
         driver.findElement(By.id("telefone")).sendKeys("85990909090");
-        driver.findElement(By.id("email")).sendKeys("QA@example.com");
+        driver.findElement(By.id("email")).sendKeys("qa@example.com");
         driver.findElement(By.id("senha")).sendKeys("Senha123");
         driver.findElement(By.id("cadastrar")).click();
 
@@ -26,8 +23,7 @@ public class fluxodecompra {
         }
 
         // Cenário 2: Login com Sucesso
-        driver.get("http://muuitosabor.com.br/login");
-        driver.findElement(By.id("email")).sendKeys("joao@example.com");
+        driver.findElement(By.id("email")).sendKeys("qa@example.com");
         driver.findElement(By.id("senha")).sendKeys("Senha123");
         driver.findElement(By.id("entrar")).click();
 
@@ -35,8 +31,7 @@ public class fluxodecompra {
             System.out.println("FALHA: Login não redirecionou corretamente");
         }
 
-        // Cenário 3: Busca de Produto
-        driver.get("http://muuitosabor.com.br");
+        // Cenário 3: Busca de Produto com sucesso
         driver.findElement(By.id("campobusca")).sendKeys("carne bovina");
         driver.findElement(By.id("buscar")).click();
         driver.findElement(By.id("produto520")).click();
@@ -45,14 +40,14 @@ public class fluxodecompra {
             System.out.println("FALHA: Não abriu a página do produto");
         }
 
-        // Cenário 4: PDP Adicionar Produto ao Carrinho
+        // Cenário 4: PDP Adicionar Produto ao Carrinho com sucesso
         driver.findElement(By.id("adicionarAoCarrinho")).click();
 
         if (!driver.getCurrentUrl().contains("carrinho")) {
             System.out.println("FALHA: Não avançou para o carrinho");
         }
 
-        // Cenário 5: Carrinho com um produto
+        // Cenário 5: Carrinho avança na compra do produto
         driver.findElement(By.id("comprar")).click();
 
         if (!driver.getCurrentUrl().contains("checkout")) {
@@ -69,16 +64,15 @@ public class fluxodecompra {
             System.out.println("FALHA: Não avançou para pagamento");
         }
 
-
         // Cenário 7: Pagamento com pix
         try {
-            new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.visibilityOfElementLocated(By.id("qrcode-pix")));
-
-            driver.findElement(By.id("finalizarCompra")).click();
-            System.out.println("Compra finalizada com sucesso!");
-
-        } catch (Exception e) { // Se DER ERRO no bloco try, executa isto:
+            if (driver.findElement(By.id("qrcode-pix")).isDisplayed()) {
+                driver.findElement(By.id("finalizarCompra")).click();
+                System.out.println("Compra finalizada com sucesso!");
+            } else {
+                System.out.println("FALHA: QR Code do PIX não apareceu");
+            }
+        } catch (Exception e) {
             System.out.println("ERRO: Falha no processo de pagamento PIX");
         }
         driver.quit();
